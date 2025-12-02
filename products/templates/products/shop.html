@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo" style="margin-bottom: 80px !important;">
+                <a href="{% url 'products:home' %}"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+            </div>
+
+            <div class="user-greeting d-flex align-items-center gap-2" style="font-size:14px; color: #fbb710; margin-bottom: 20px;">
+            <span>Hi, {{ request.user.first_name }}!</span>
+            <form method="POST" action="" style="margin-left: auto;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout-icon" name="logout" style="
+                background:none;
+                border:none;
+                color:#fbb710;
+                font-size:16px;
+                cursor:pointer;
+                transition:0.3s;
+            " title="Logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </button>
+            </form>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                    <li><a href="{% url 'products:home' %}">Home</a></li>
+                    <li class="active"><a href="">Shop</a></li>
+                    <li><a href="{% url 'products:cart' %}">Cart</a></li>
+                    <li><a href="{% url 'payment:checkout' %}">Checkout</a></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="{% url 'products:cart' %}" class="cart-nav"><img src="{% static 'img/core-img/cart.png' %}" alt=""> Cart <span>({{ cart_items.count|default:0 }})</span></a>
+                <a href="#" class="search-nav"><img src="{% static 'img/core-img/search.png' %}" alt=""> Search</a>
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </header>
+        <!-- Header Area End -->
+
+        <form method="get">
+        <div class="shop_sidebar_area">
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget catagory mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">Catagories</h6>
+
+                <!--  Catagories  -->
+                
+                <div class="catagories-menu">
+                    <ul>
+                        
+                        <li class="active"><a href="?product_category=Chairs">Chairs</a></li>
+                        <li><a href="?product_category=Beds">Beds</a></li>
+                        <li><a href="?product_category=Accessories">Accesories</a></li>
+                        <li><a href="?product_category=Furniture">Furniture</a></li>
+                        <li><a href="?product_category=Home Deco">Home Deco</a></li>
+                        <li><a href="?product_category=Dressings">Dressings</a></li>
+                        <li><a href="?product_category=Tables">Tables</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget brands mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">Brands</h6>
+
+                <div class="widget-desc">
+                    <!-- Single Form Check -->
+                    <div class="form-check">
+                        <label class="form-check-label" for="amado"><a href="?product_brand=Amado" style="font-size: 16px;text-decoration: none;
+                        outline: 0 solid transparent;
+                        color: #959595;
+                        font-weight: 400;">Amado</a></label>
+                    </div>
+                    <!-- Single Form Check -->
+                    <div class="form-check">
+                        <label class="form-check-label" for="amado"><a href="?product_brand=Ikea" style="font-size: 16px;text-decoration: none;
+                        outline: 0 solid transparent;
+                        color: #959595;
+                        font-weight: 400;">Ikea</a></label>
+                    </div>
+                    <!-- Single Form Check -->
+                    <div class="form-check">
+                        <label class="form-check-label" for="amado"><a href="?product_brand=Furniture Inc" style="font-size: 16px;text-decoration: none;
+                        outline: 0 solid transparent;
+                        color: #959595;
+                        font-weight: 400;">Furniture Inc</a></label>
+                    </div>
+                    <!-- Single Form Check -->
+                    <div class="form-check">
+                        <label class="form-check-label" for="amado"><a href="?product_brand=The factory" style="font-size: 16px;text-decoration: none;
+                        outline: 0 solid transparent;
+                        color: #959595;
+                        font-weight: 400;">The factory</a></label>
+                    </div>
+                    <!-- Single Form Check -->
+                    <div class="form-check">
+                        <label class="form-check-label" for="amado"><a href="?product_brand=Artdeco" style="font-size: 16px;text-decoration: none;
+                        outline: 0 solid transparent;
+                        color: #959595;
+                        font-weight: 400;">Artdeco</a></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget color mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">Color</h6>
+
+                <div class="widget-desc">
+                    <ul class="d-flex">
+                        <li><a href="?product_color=white" class="color1"></a></li>
+                        <li><a href="?product_color=grey" class="color2"></a></li>
+                        <li><a href="?product_color=black" class="color3"></a></li>
+                        <li><a href="?product_color=blue" class="color4"></a></li>
+                        <li><a href="?product_color=pink" class="color5"></a></li>
+                        <li><a href="?product_color=yellow" class="color6"></a></li>
+                        <li><a href="?product_color=brown" class="color7"></a></li>
+                        <li><a href="?product_color=grey" class="color8"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </form>
+
+        <div class="amado_product_area section-padding-100">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                            <!-- Total Products -->
+                            <div class="total-products">
+                                {% if products.count > 8 %}
+                                <p>Showing 1-8 0f {{products.count}}</p>
+                                {% else %}
+                                <p>Showing {{products.number}} 0f {{products.paginator.num_pages}}</p>
+                                {% endif %}
+                                
+                            </div>
+                            <!-- Sorting -->
+                            <div class="product-sorting d-flex">
+                                <div class="sort-by-date d-flex align-items-center mr-15">
+                                    <p>Sort by</p>
+                                    <form action="#" method="get">
+                                        <select name="select_order" id="sortBydate" onchange="this.form.submit()">
+                                            <option value="date">Date</option>
+                                            <option value="newest">Newest</option>
+                                            <option value="popular">Popular</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="view-product d-flex align-items-center">
+                                    <p>View</p>
+                                    <form method="get">
+                                        <select name="select_product_number" id="viewProduct" onchange="this.form.submit()">
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                            <option value="48">48</option>
+                                            <option value="96">96</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+                    {% for product in products %}
+                    <!-- Single Product Area -->
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                                <div class="product-img">
+                                    <img src="{{product.product_image.url}}" alt="none">
+                                    <!-- Hover Thumb -->
+                                    <img class="hover-img" src="{{ product.product_images.first.product_uploaded_image.url }}" alt="">
+                                </div>
+
+                            <!-- Product Description -->
+                            <div class="product-description d-flex align-items-center justify-content-between">
+                                <!-- Product Meta Data -->
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price">${{product.product_price}}</p>
+                                    <a href="{% url 'products:product-details' product.id %}">
+                                        <h6>{{product.product_name}}</h6>
+                                    </a>
+                                </div>
+                                <!-- Ratings & Cart -->
+                                <div class="ratings-cart text-right">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <form method="get" action="{% url 'products:cart' %}">
+                                    <input type="hidden" name="add_to_cart" value="{{ product.id }}">
+
+                                    <button type="submit" class="cart-btn" data-toggle="tooltip" data-placement="left" title="Add to Cart"
+                                            style="background:none; border:none; cursor:pointer;">
+                                        <img src="{% static 'img/core-img/cart.png' %}" alt="">
+                                    </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Pagination -->
+                        {% if products.has_other_pages %}
+                        <nav aria-label="navigation">
+                            <ul class="pagination justify-content-end mt-50">
+                                {% for num in products.paginator.page_range %}
+                                {% if products.number == num %}
+                                <li class="page-item active"><a class="page-link" href="?page={{num}}">{{ num|stringformat:"02d" }}.</a></li>
+                                {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{num}}">{{ num|stringformat:"02d" }}.</a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+{% endblock %}

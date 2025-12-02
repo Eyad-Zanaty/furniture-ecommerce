@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password - Amado Theme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      height: 100%;
+      background: #f8f8f8;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .auth-container {
+      background: #fff;
+      width: 100%;
+      max-width: 550px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #111;
+      text-align: center;
+    }
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 12px 0;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #fbbf24;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #e0a817;
+    }
+    .text-center { text-align: center; }
+    .link {
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .link:hover { text-decoration: underline; }
+
+    /* Arrange fields side by side on large screens */
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+    .row input {
+      flex: 1;
+    }
+
+    @media(max-width: 480px){
+      .auth-container { padding: 15px; max-width: 100%; }
+      .row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+    <h2>Reset Password</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div>
+                <label>First Name</label>
+                <input type="text" name="first_name" placeholder="Enter first name" required />
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input type="text" name="last_name" placeholder="Enter last name" required />
+            </div>
+        </div>
+
+        <label>Company Name</label>
+        <input type="text" name="company_name" placeholder="Enter company name" />
+
+        <div class="row">
+            <div>
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter email" required />
+            </div>
+            <div>
+                <label>Phone Number</label>
+                <input type="text" name="phone_number" placeholder="Enter phone number" />
+            </div>
+        </div>
+
+        <label>Address</label>
+        <input type="text" name="address" placeholder="Enter address" />
+
+        <div class="row">
+            <div>
+                <label>Password</label>
+                <input type="password" name="password1" placeholder="Enter password" required />
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <input type="password" name="password2" placeholder="Confirm password" required />
+            </div>
+        </div>
+        {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
+        <button class="btn">Sign Up</button>
+    </form>
+    <p class="text-center"><a href="{% url 'users:login' %}" class="link">Back to Login</a></p>
+</div>
+
+</body>
+</html>

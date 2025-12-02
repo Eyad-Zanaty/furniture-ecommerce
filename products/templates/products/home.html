@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo" style="margin-bottom: 80px !important;">
+                <a href="{% url 'products:home' %}"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+            </div>
+
+            <div class="user-greeting d-flex align-items-center gap-2" style="font-size:14px; color: #fbb710; margin-bottom: 20px;">
+            <span>Hi, {{ request.user.first_name }}!</span>
+            <form method="POST" action="" style="margin-left: auto;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout-icon" name="logout" style="
+                background:none;
+                border:none;
+                color:#fbb710;
+                font-size:16px;
+                cursor:pointer;
+                transition:0.3s;
+            " title="Logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </button>
+            </form>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                    <li class="active"><a href="{% url 'products:home' %}">Home</a></li>
+                    <li><a href="{% url 'products:shop' %}">Shop</a></li>
+                    <li><a href="{% url 'products:cart' %}">Cart</a></li>
+                    <li><a href="{% url 'payment:checkout' %}">Checkout</a></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="{% url 'products:cart' %}" class="cart-nav"><img src="{% static 'img/core-img/cart.png' %}" alt=""> Cart <span>({{ cart_items.count|default:0 }})</span></a>
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </header>
+        <!-- Header Area End -->
+        <!-- Product Catagories Area Start -->
+        <div class="products-catagories-area clearfix">
+            <div class="amado-pro-catagory clearfix">
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Chairs">
+                        <img src="{% static 'img/bg-img/1.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{chairs_product.product_price__min|default:0}}</p>
+                            <h4>Modern Chair</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Home Deco">
+                        <img src="{% static 'img/bg-img/2.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{home_deco.product_price__min|default:0}}</p>
+                            <h4>Minimalistic Plant Pot</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Chairs">
+                        <img src="{% static 'img/bg-img/3.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{chairs.product_price__min|default:0}}</p>
+                            <h4>Modern Chair</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Home Deco">
+                        <img src="{% static 'img/bg-img/4.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{home_deco.product_price__min|default:0}}</p>
+                            <h4>Night Stand</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Home Deco">
+                        <img src="{% static 'img/bg-img/5.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{home_deco.product_price__min|default:0}}</p>
+                            <h4>Plant Pot</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Tables">
+                        <img src="{% static 'img/bg-img/6.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{tables.product_price__min|default:0}}</p>
+                            <h4>Small Table</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Chairs">
+                        <img src="{% static 'img/bg-img/7.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{chairs.product_price__min|default:0}}</p>
+                            <h4>Metallic Chair</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Chairs">
+                        <img src="{% static 'img/bg-img/8.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{chairs.product_price__min|default:0}}</p>
+                            <h4>Modern Rocking Chair</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{% url 'products:shop' %}?product_category=Home Deco">
+                        <img src="{% static 'img/bg-img/9.jpg' %}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{home_deco.product_price__min|default:0}}</p>
+                            <h4>Home Deco</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Product Catagories Area End -->
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+{% endblock %}

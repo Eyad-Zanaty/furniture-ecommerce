@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo" style="margin-bottom: 80px !important;">
+                <a href="{% url 'products:home' %}"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+            </div>
+
+            <div class="user-greeting d-flex align-items-center gap-2" style="font-size:14px; color: #fbb710; margin-bottom: 20px;">
+            <span>Hi, {{ request.user.first_name }}!</span>
+            <form method="POST" action="" style="margin-left: auto;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout-icon" name="logout" style="
+                background:none;
+                border:none;
+                color:#fbb710;
+                font-size:16px;
+                cursor:pointer;
+                transition:0.3s;
+            " title="Logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </button>
+            </form>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                    <li><a href="{% url 'products:home' %}">Home</a></li>
+                    <li><a href="{% url 'products:shop' %}">Shop</a></li>
+                    <li class="active"><a href="{% url 'products:product-details' product.id %}">Product</a></li>
+                    <li><a href="{% url 'products:cart' %}">Cart</a></li>
+                    <li><a href="{% url 'payment:checkout' %}">Checkout</a></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+                
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="{% url 'products:cart' %}" class="cart-nav"><img src="{% static 'img/core-img/cart.png' %}" alt=""> Cart <span>({{ cart_items.count|default:0 }})</span></a>
+                <a href="#" class="search-nav"><img src="{% static 'img/core-img/search.png' %}" alt=""> Search</a>
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </header>
+        <!-- Header Area End -->
+
+        <!-- Product Details Area Start -->
+        <div class="single-product-area section-padding-100 clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Furniture</a></li>
+                                <li class="breadcrumb-item"><a href="#">Chairs</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">white modern chair</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{ product.product_image.url }});">
+                                    </li>
+                                    {% for image in product_images %}
+                                    <li data-target="#product_details_slider" data-slide-to="{{ forloop.counter }}" style="background-image: url({{ image.product_uploaded_image.url }});">
+                                    </li>
+                                    {% endfor %}
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a class="gallery_img" href="{{ product.product_image.url }}">
+                                            <img class="d-block w-100" src="{{ product.product_image.url }}" alt="First slide">
+                                        </a>
+                                    </div>
+                                    {% with product.product_images.all as images %}
+                                    {% if product.product_images.count >= 1 %}
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{ images.0.product_uploaded_image.url }}">
+                                            <img class="d-block w-100" src="{{ images.0.product_uploaded_image.url }}" alt="Second slide">
+                                        </a>
+                                    </div>
+                                    {% elif product.product_images.count >= 2 %}
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{ images.1.product_uploaded_image.url }}">
+                                            <img class="d-block w-100" src="{{ images.1.product_uploaded_image.url }}" alt="Third slide">
+                                        </a>
+                                    </div>
+                                    {% elif product.product_images.count >= 3 %}
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{ images.2.product_uploaded_image.url }}">
+                                            <img class="d-block w-100" src="{{ images.2.product_uploaded_image.url }}" alt="Fourth slide">
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price">${{product.product_price}}</p>
+                                <a href="product-details.html">
+                                    <h6>{{product.product_name}}</h6>
+                                </a>
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <!-- Avaiable -->
+                                {% if product.product_instock %}
+                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                                {% else %}
+                                <p class="avaibility"><i class="fa fa-circle"></i> Out of Stock</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <p>{{product.product_description}}</p>
+                            </div>
+
+                            <!-- Add to Cart Form -->
+                                <form class="cart clearfix" method="post">
+                                    {% csrf_token %}
+                                    <div class="cart-btn d-flex mb-50">
+                                        <p>Qty</p>
+                                        <div class="quantity">
+                                            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                            <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                                </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Details Area End -->
+    </div>
+{% endblock %}

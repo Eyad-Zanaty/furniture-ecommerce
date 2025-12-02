@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo" style="margin-bottom: 80px !important;">
+                <a href="{% url 'products:home' %}"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+            </div>
+
+            <div class="user-greeting d-flex align-items-center gap-2" style="font-size:14px; color: #fbb710; margin-bottom: 20px;">
+            <span>Hi, {{ request.user.first_name }}!</span>
+            <form method="POST" action="" style="margin-left: auto;">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout-icon" name="logout" style="
+                background:none;
+                border:none;
+                color:#fbb710;
+                font-size:16px;
+                cursor:pointer;
+                transition:0.3s;
+            " title="Logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </button>
+            </form>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+                <ul>
+                    <li><a href="{% url 'products:home' %}">Home</a></li>
+                    <li><a href="{% url 'products:shop' %}">Shop</a></li>
+                    <li><a href="{% url 'products:cart' %}">Cart</a></li>
+                    <li class="active"><a href="{% url 'payment:checkout' %}">Checkout</a></li>
+                </ul>
+            </nav>
+            <!-- Button Group -->
+            <div class="amado-btn-group mt-30 mb-100">
+
+            </div>
+            <!-- Cart Menu -->
+            <div class="cart-fav-search mb-100">
+                <a href="{% url 'products:cart' %}" class="cart-nav"><img src="{% static 'img/core-img/cart.png' %}" alt=""> Cart <span>({{ cart_items.count|default:0 }})</span></a>
+            </div>
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </header>
+        <!-- Header Area End -->
+
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-title">
+                                <h2>Checkout</h2>
+                            </div>
+
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        {{ form.checkout_firstname }}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        {{ form.checkout_lastname }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        {{ form.checkout_company_name }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        {{ form.checkout_email }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        {{ form.checkout_country }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        {{ form.checkout_address }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        {{ form.checkout_town }}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        {{ form.checkout_zipcode }}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        {{ form.checkout_phone_number }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        {{ form.checkout_order_comment }}
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox d-block mb-2">
+                                            {{ form.checkout_create_account }}
+                                            <label class="custom-control-label" for="customCheck2">Create an accout</label>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-summary">
+                            <h5>Cart Total</h5>
+                            <ul class="summary-table">
+                                <li><span>subtotal:</span> <span>${{sub_price}}</span></li>
+                                <li><span>delivery:</span> <span>$50</span></li>
+                                <li><span>total:</span> <span>${{total_price}}</span></li>
+                            </ul>
+                            <form action="{% url 'payment:paymob' %}" method="post" id="paymob-form">
+                            {% csrf_token %}
+                            <div class="payment-method">
+                                <!-- Cash on delivery -->
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input type="checkbox" class="custom-control-input" id="cod" checked>
+                                    <label class="custom-control-label" for="cod">Cash on Delivery</label>
+                                </div>
+                                <!-- paymob -->
+                                or
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <a href="#" onclick="document.getElementById('paymob-form').submit();" style="font-size: 14px;
+                                            color: #6b6b6b;
+                                            font-weight: 400;
+                                            margin-bottom: 15px;">
+                                    Choose paymob<img class="ml-15" src="{% static 'img/core-img/paypal.png' %}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="cart-btn mt-100">
+                                <input type="submit" class="btn amado-btn w-100" value="Checkout">
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+{% endblock %}

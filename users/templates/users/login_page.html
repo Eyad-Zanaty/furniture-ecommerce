@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Amado Theme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .auth-container {
+      background: #fff;
+      width: 95%;
+      max-width: 420px;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #111;
+      text-align: center;
+    }
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 18px 0;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: #fbbf24; /* Amado yellow */
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #e0a817;
+    }
+    .text-center { text-align: center; }
+    .link {
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+    /* Responsive */
+    @media(max-width: 480px){
+      .auth-container { padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN PAGE TEMPLATE -->
+  <div class="auth-container" id="login-page">
+    <h2>Login</h2>
+    <form method="post" action="">
+      {% csrf_token %}
+      <label>Email</label>
+      <input type="email" name="email" placeholder="Enter your email" required />
+
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter your password" required />
+
+      {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
+
+      <button class="btn">Login</button>
+    </form>
+    <p class="text-center"><a href="{% url 'users:reset_password' %}" class="link">Forgot Password?</a></p>
+    <p class="text-center">Don't have an account? <a href="{% url 'users:signup' %}" class="link">Sign Up</a></p>
+  </div>
+
+</body>
+</html>
