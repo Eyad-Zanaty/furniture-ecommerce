@@ -6,31 +6,25 @@ This project is a full-featured Furniture E-Commerce Platform built with Django,
 
 To enhance performance and scalability, the project uses WhiteNoise for static file serving, Cloudinary for media storage, and Redis to optimize cart, sessions, and API performance. It also includes email notifications via Django Gmail SMTP, robust order management, secure checkout flow, and admin-friendly product management.
 
+```
 
+## 📁 Project Structure
+
+```plaintext
 furniture-ecommerce/
 │
 ├── manage.py
 ├── requirements.txt
 ├── Dockerfile
 │
-├── project/                # Django project root (settings, urls, wsgi/asgi)
+├── project/                     # Django project root (settings, urls, wsgi/asgi)
 │   ├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── asgi.py
 │
-├── users/                  # App for user authentication / user management
-│   ├── migrations/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── models.py
-│   ├── serializers.py      # Using DRF
-│   ├── views.py
-│   ├── urls.py
-│   └── (other files: permissions, etc.)
-│
-├── products/               # App for products catalog, categories, images
+├── users/                       # Authentication & User Management
 │   ├── migrations/
 │   ├── __init__.py
 │   ├── admin.py
@@ -38,31 +32,42 @@ furniture-ecommerce/
 │   ├── serializers.py
 │   ├── views.py
 │   ├── urls.py
-│   └── (maybe image handling, cloudinary integration)
+│   └── permissions.py (if any)
 │
-├── payment/                # App or module for payment logic / order payment
+├── products/                    # Products, Categories, Images
+│   ├── migrations/
 │   ├── __init__.py
-│   ├── payment logic files (e.g. payment handlers, integrations)
-│   ├── models.py (if orders/payments stored)
-│   ├── serializers.py / views.py / urls.py (if via API)
-│   └── (other related modules)
-│
-├── apis/                   # For API endpoints (Django REST Framework)
-│   ├── __init__.py
-│   ├── maybe versioning or router configs
+│   ├── admin.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── views.py
 │   ├── urls.py
-│   └── (other API-level configs)
+│   └── cloudinary handlers (if any)
 │
-├── static/                 # Static files (CSS / JS / images / frontend assets)
+├── payment/                     # Payment integration logic
+│   ├── __init__.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── views.py
+│   ├── urls.py
+│   └── payment handlers / gateways
+│
+├── apis/                        # API endpoints structure
+│   ├── __init__.py
+│   ├── urls.py
+│   └── routers / versioning
+│
+├── static/                      # Static assets
 │   └── ...
 │
-├── staticfiles/            # Collected static files — for deployment (e.g. via WhiteNoise)
+├── staticfiles/                 # Collected static files (for WhiteNoise)
 │   └── ...
 │
-├── templates/              # HTML templates (if you have any server-side rendered pages)
-│   └── (base templates, emails, etc.)
+├── templates/                   # Email & HTML templates
+│   └── ...
 │
-├── media/                  # Media / uploaded files (e.g. product images) — before or after Cloudinary sync 
+├── media/                       # Uploaded media
 │   └── products_image/
 │
+└── README.md                    # Project documentation
 └── README.md               # Project documentation
