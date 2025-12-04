@@ -23,9 +23,10 @@ brand_choices= [
 
 
 class ProductFilter(django_filters.FilterSet):
-    product_category= django_filters.ChoiceFilter(choices=category_choices)
-    product_brand= django_filters.MultipleChoiceFilter(choices=brand_choices, widget=forms.CheckboxSelectMultiple)
-    product_color= django_filters.CharFilter(lookup_expr='iexact')
+    product_category= django_filters.ChoiceFilter(field_name= 'product_category', choices=category_choices)
+    product_brand= django_filters.MultipleChoiceFilter(field_name= 'product_brand', choices=brand_choices, widget=forms.CheckboxSelectMultiple)
+    product_name= django_filters.CharFilter(field_name='product_name', lookup_expr='icontains')
+    product_color= django_filters.CharFilter(field_name= 'product_color', lookup_expr='iexact')
     min_price = django_filters.NumberFilter(field_name='product_price', lookup_expr='gte')
     max_price = django_filters.NumberFilter(field_name='product_price', lookup_expr='lte')
     
@@ -34,7 +35,7 @@ class ProductFilter(django_filters.FilterSet):
         fields={
             'product_category': ['exact'],
             'product_brand': ['contains'],
-            'product_name': ['contains'],
+            'product_name': ['icontains'],
             'product_color': ['exact'],
             'product_price': ['exact'],
         }

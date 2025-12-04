@@ -58,7 +58,7 @@ def payment_callback(request):
         print("Payment successful")
         get_order.order_status = "success"
         
-        message= f"""Hello { request.user.first_name },
+        message= f"""Hello {request.user.firts_name},
 
 Thank you for your purchase!
 

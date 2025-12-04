@@ -172,7 +172,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
     'https://*.ngrok-free.app',
-    'https://48abd620149d.ngrok-free.app/checkout/paymob/webhook/'
+    'https://0e8137b68f08.ngrok-free.app/checkout/paymob/webhook/'
 ]
 
 
