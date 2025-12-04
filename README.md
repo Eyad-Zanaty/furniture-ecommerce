@@ -6,6 +6,25 @@ This project is a full-featured Furniture E-Commerce Platform built with Django,
 
 To enhance performance and scalability, the project uses WhiteNoise for static file serving, Cloudinary for media storage, and Redis to optimize cart, sessions, and API performance. It also includes email notifications via Django Gmail SMTP, robust order management, secure checkout flow, and admin-friendly product management.
 
+<br/>
+
+## Technologies & Tools Used
+
+- Django
+- Django REST Framework (DRF)
+- PostgreSQL
+- Redis (caching for cart, sessions, and API performance)
+- Authentication & Authorization (JWT / Django auth)
+- Payment Integration: Stripe, PayPal, Paymob
+- Cloudinary (media storage)
+- WhiteNoise (static file serving)
+- Django Gmail SMTP (email notifications)
+- Docker
+- Python 3.x
+- HTML templates (for emails / admin if any)
+- Git / GitHub (version control)
+- Docker Compose (if used for local setup)
+
 ```
 
 ## 📁 Project Structure
