@@ -70,4 +70,7 @@ furniture-ecommerce/
 │   └── products_image/
 │
 └── README.md                    # Project documentation
-└── README.md               # Project documentation
+
+```
+
+
