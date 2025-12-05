@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import CustomUser as User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -12,7 +12,7 @@ def login_view(request):
             user= authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, 'products/home.html', {'message': 'Login successful'})
+                return redirect('products:home')
             else:
                 error= 'Invalid email or password'
                 return render(request, 'users/login_page.html', {"error":error})

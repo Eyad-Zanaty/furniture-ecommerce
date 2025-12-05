@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from products.models import Cart, Subscribtions
 from .forms import CheckoutForm
@@ -42,7 +42,7 @@ def checkout_view(request):
     
     if request.method == 'POST' and 'logout' in request.POST:
         logout(request)
-        return render(request, 'users/login_page.html')
+        return redirect('users:login')
     
     
     if request.method == 'POST' and 'email_subscription' in request.POST:

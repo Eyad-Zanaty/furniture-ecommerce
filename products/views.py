@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from django.db.models import Min
 from django.views.decorators.csrf import csrf_exempt
@@ -22,7 +22,7 @@ def home(request):
     
     if request.method == 'POST' and 'logout' in request.POST:
         logout(request)
-        return render(request, 'users/login_page.html')
+        return redirect('users:login')
     
     if request.method == 'POST' and 'email_subscription' in request.POST:
         email= request.POST.get('email_subscription')
@@ -83,7 +83,7 @@ def shop(request):
         
     if request.method == 'POST' and 'logout' in request.POST:
         logout(request)
-        return render(request, 'users/login_page.html')
+        return redirect('users:login')
     
     if request.method == 'POST' and 'email_subscription' in request.POST:
         email= request.POST.get('email_subscription')
@@ -159,7 +159,7 @@ def product_details(request, pk):
             
     if request.method == 'POST' and 'logout' in request.POST:
         logout(request)
-        return render(request, 'users/login_page.html')
+        return redirect('users:login')
     
     
     if request.method == 'POST' and 'email_subscription' in request.POST:
@@ -213,7 +213,7 @@ def cart(request):
     
     if request.method == 'POST' and 'logout' in request.POST:
         logout(request)
-        return render(request, 'users/login_page.html')
+        return redirect('users:login')
     
     
     if request.method == 'POST' and 'email_subscription' in request.POST:
