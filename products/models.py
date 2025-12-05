@@ -3,7 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.forms import ValidationError
 from django.conf import settings
 from users.models import CustomUser
-
+from cloudinary.models import CloudinaryField
+from django_resized import ResizedImageField
 # Create your models here.
 
 
@@ -49,7 +50,7 @@ class Product(models.Model):
         ])
     product_instock=models.BooleanField(default=True)
     product_date=models.DateTimeField(auto_now_add=True)
-    product_image= models.ImageField(upload_to='products_image/%y/%m/%d/', null=True, blank=True)
+    product_image= ResizedImageField(quality= 85,upload_to='products_image/%y/%m/%d/')
     
     class Meta:
         verbose_name = 'Products'
@@ -65,7 +66,7 @@ class ProductImage(models.Model):
         on_delete=models.CASCADE,
         related_name='product_images',
     )
-    product_uploaded_image=models.ImageField(upload_to='products_image/%y/%m/%d/images')
+    product_uploaded_image=ResizedImageField(quality= 85,upload_to='products_image/%y/%m/%d/images')
     product_image_date=models.DateTimeField(auto_now_add=True)
     
     class Meta:

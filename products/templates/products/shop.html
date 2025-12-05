@@ -196,9 +196,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                                 <div class="product-img">
-                                    <img src="{{product.product_image.url}}" alt="none">
+                                    <img src="{{product.product_image.url}}" alt="{{product.product_image.url}}">
                                     <!-- Hover Thumb -->
-                                    <img class="hover-img" src="{{ product.product_images.first.product_uploaded_image.url }}" alt="">
+                                    <img class="hover-img" src="{{ product.product_images.first.product_uploaded_image.url }}" alt="{{product.product_image.url}}">
                                 </div>
 
                             <!-- Product Description -->

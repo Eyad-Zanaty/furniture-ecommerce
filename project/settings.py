@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apis',
     'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -127,14 +128,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('cloudinary_cloud_name'),
+    'API_KEY': config('cloudinary_api_key'),
+    'API_SECRET': config('cloudinary_api_secret'),
+}
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": 'cloudinary_storage.storage.MediaCloudinaryStorage',
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
@@ -176,11 +183,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-cloudinary.config(
-    cloud_name= config('cloudinary_cloud_name'),
-    api_key= config('cloudinary_api_key'),
-    api_secret= config('cloudinary_api_secret'),
-)
+
 
 # Postgres_locally= True
 # if ENVIROMENT== 'production' or Postgres_locally= True:
