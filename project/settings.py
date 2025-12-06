@@ -29,7 +29,11 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'https://furniture-ecommerce-ypv8.onrender.com/'
+    ]
 
 
 # Application definition
@@ -178,8 +182,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
-    'https://*.ngrok-free.app',
-    'https://0e8137b68f08.ngrok-free.app/checkout/paymob/webhook/'
+    'https://furniture-ecommerce-ypv8.onrender.com/'
 ]
 
 
