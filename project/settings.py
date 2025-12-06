@@ -183,8 +183,6 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-
-
 # Postgres_locally= True
 # if ENVIROMENT== 'production' or Postgres_locally= True:
 #     DATABASES['default']= dj_database_url.parse(env())
