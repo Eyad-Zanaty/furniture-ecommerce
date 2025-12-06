@@ -152,6 +152,8 @@ STORAGES = {
     },
 }
 
+WHITENOISE_KEEP_ONLY_HASHED_FILES = False
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
