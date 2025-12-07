@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import dj_database_url
+import psycopg2
 from pathlib import Path
 from decouple import config
 from django.core.management.utils import get_random_secret_key
@@ -184,7 +186,13 @@ CSRF_TRUSTED_ORIGINS = [
     'https://furniture-ecommerce-production.up.railway.app'
 ]
 
+ENVIRONMENT='production'
 
-# Postgres_locally= True
-# if ENVIROMENT== 'production' or Postgres_locally= True:
-#     DATABASES['default']= dj_database_url.parse(env())
+if ENVIRONMENT == 'development':
+    DEBUG= True
+else:
+    DEBUG=False
+
+POSTGRES_LOCALLY= True
+if ENVIRONMENT== 'production' or POSTGRES_LOCALLY== True:
+    DATABASES['default']= dj_database_url.parse(config('DATABASE_URL'))
