@@ -59,7 +59,7 @@ To enhance performance and scalability, the project uses WhiteNoise for static f
 /orders/<id>/              → PUT (Update Order)  
 /orders/<id>/              → DELETE (Delete Order)
 
-![alt text](landpage-screenshot.jpg])
+![alt text](/landpage-screenshot.jpg])
 
 ```
 
