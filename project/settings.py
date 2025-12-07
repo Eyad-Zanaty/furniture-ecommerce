@@ -30,9 +30,9 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    'https://furniture-ecommerce-production.up.railway.app/'
+    '127.0.0.1:8000',
+    'localhost:8000',
+    'furniture-ecommerce-production.up.railway.app'
     ]
 
 
@@ -182,7 +182,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
-    'https://furniture-ecommerce-production.up.railway.app/'
+    'https://furniture-ecommerce-production.up.railway.app'
 ]
 
 
