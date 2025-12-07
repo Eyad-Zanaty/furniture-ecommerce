@@ -6,8 +6,6 @@ This project is a full-featured Furniture E-Commerce Platform built with Django,
 
 To enhance performance and scalability, the project uses WhiteNoise for static file serving, Cloudinary for media storage, and Redis to optimise cart, sessions, and API performance. It also includes email notifications via Django Gmail SMTP, robust order management, secure checkout flow, and admin-friendly product management.
 
-[landpage-screenshot.jpg]
-
 ## Technologies & Tools Used
 
 - Django
@@ -24,6 +22,44 @@ To enhance performance and scalability, the project uses WhiteNoise for static f
 - frontend template
 - Git / GitHub (version control)
 - Docker Compose (if used for local setup)
+
+## 📦 API Endpoints Diagram
+
+### 🛒 Products API
+/products/                 → GET (List Products)  
+/products/                 → POST (Create Product)  
+/products/<id>/            → PUT (Update Product)  
+/products/<id>/            → DELETE (Delete Product)
+
+### 👤 Users API (Admin Only)
+/users/                    → GET (List Users)  
+/users/                    → POST (Create User)  
+/users/<id>/               → GET (Retrieve User)  
+/users/<id>/               → PUT (Update User)  
+/users/<id>/               → DELETE (Delete User)
+
+### 🛍 Cart API
+/cart/                     → GET (List Cart Items)  
+/cart/                     → POST (Add to Cart)  
+/cart/<id>/                → GET (Retrieve Cart Item)  
+/cart/<id>/                → PUT (Update Cart Item)  
+/cart/<id>/                → DELETE (Delete Cart Item)
+
+### 💳 Checkout API
+/checkout/                 → GET (List Checkouts)  
+/checkout/                 → POST (Create Checkout Session)  
+/checkout/<id>/            → GET (Retrieve Checkout)  
+/checkout/<id>/            → PUT (Update Checkout)  
+/checkout/<id>/            → DELETE (Delete Checkout)
+
+### 📦 Orders API
+/orders/                   → GET (List Orders)  
+/orders/                   → POST (Create Order)  
+/orders/<id>/              → GET (Retrieve Order)  
+/orders/<id>/              → PUT (Update Order)  
+/orders/<id>/              → DELETE (Delete Order)
+
+![alt text](landpage-screenshot.jpg])
 
 ```
 
