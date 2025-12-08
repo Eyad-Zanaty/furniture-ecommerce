@@ -41,7 +41,15 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         'furniture-ecommerce-production.up.railway.app',
-        '*'
+        'furniture-ecommerce-production.up.railway.app/',
+        'furniture-ecommerce-production.up.railway.app/admin/',
+        'furniture-ecommerce-production.up.railway.app/shop/',
+        'furniture-ecommerce-production.up.railway.app/shop/<int:pk>/',
+        'furniture-ecommerce-production.up.railway.app/checkout/paymob/create/',
+        'furniture-ecommerce-production.up.railway.app/accounts/login/',
+        'furniture-ecommerce-production.up.railway.app/accounts/reset-password/',
+        'furniture-ecommerce-production.up.railway.app/accounts/signup/',
+        'furniture-ecommerce-production.up.railway.app/checkout/paymob/webhook/',
     ]
 
 CSRF_TRUSTED_ORIGINS=[
