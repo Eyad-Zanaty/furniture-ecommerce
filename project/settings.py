@@ -35,9 +35,7 @@ SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'furniture-ecommerce-production.up.railway.app'
+    '*'
     ]
 
 
