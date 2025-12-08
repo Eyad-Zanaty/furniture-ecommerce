@@ -29,24 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
-ALLOWED_HOSTS=[
-    'localhosts',
-    '0.0.0.0',
-    '127.0.0.1',
-    'furniture-ecommerce-production.up.railway.app',
-    'https://furniture-ecommerce-production.up.railway.app'
-    ]
+
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG= False
 
-# ALLOWED_HOSTS=[
-#     'localhosts',
-#     '0.0.0.0',
-#     '127.0.0.1',
-#     'furniture-ecommerce-production.up.railway.app',
-#     'https://furniture-ecommerce-production.up.railway.app'
-#     ]
+ALLOWED_HOSTS=['*',]
 
 CSRF_TRUSTED_ORIGINS=[
     'https://furniture-ecommerce-production.up.railway.app',
