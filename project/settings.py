@@ -187,8 +187,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://furniture-ecommerce-production.up.railway.app',
 ]
 
-ENVIRONMENT='production'
-
 ENVIRONMENT = 'production'
 
 if ENVIRONMENT == 'development':
