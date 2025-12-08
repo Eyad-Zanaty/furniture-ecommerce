@@ -35,11 +35,11 @@ SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
 # DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG= False
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS=[
     'furniture-ecommerce-production.up.railway.app',
     ]
 
-CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS=[
     'https://furniture-ecommerce-production.up.railway.app',
     'http://127.0.0.1:8000',
     'http://localhost:8000',
