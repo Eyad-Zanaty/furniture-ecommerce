@@ -33,10 +33,11 @@ SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=False, cast=bool)
-DEBUG= True
+DEBUG= False
 
 ALLOWED_HOSTS = [
-    '*'
+    'furniture-ecommerce-production.up.railway.app',
+    'furniture-ecommerce-production.up.railway.app/'
     ]
 
 
