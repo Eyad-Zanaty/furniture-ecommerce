@@ -37,7 +37,7 @@ DEBUG= False
 ALLOWED_HOSTS=[
     'localhosts',
     '0.0.0.0',
-    '127.0.0.1'
+    '127.0.0.1',
     'furniture-ecommerce-production.up.railway.app',
     ]
 
