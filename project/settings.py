@@ -39,6 +39,7 @@ ALLOWED_HOSTS=[
     '0.0.0.0',
     '127.0.0.1',
     'furniture-ecommerce-production.up.railway.app',
+    'https://furniture-ecommerce-production.up.railway.app'
     ]
 
 CSRF_TRUSTED_ORIGINS=[
