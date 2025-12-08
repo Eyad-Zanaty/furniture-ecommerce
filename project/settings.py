@@ -37,9 +37,13 @@ DEBUG= False
 
 ALLOWED_HOSTS = [
     'furniture-ecommerce-production.up.railway.app',
-    'furniture-ecommerce-production.up.railway.app/'
     ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://furniture-ecommerce-production.up.railway.app',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
 
 # Application definition
 
@@ -180,13 +184,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    'https://furniture-ecommerce-production.up.railway.app',
-]
 
 ENVIRONMENT = 'production'
 
