@@ -33,7 +33,7 @@ SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=False, cast=bool)
-DEBUG= False
+DEBUG= True
 
 ALLOWED_HOSTS = [
     '*'
