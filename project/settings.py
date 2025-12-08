@@ -189,10 +189,12 @@ CSRF_TRUSTED_ORIGINS = [
 
 ENVIRONMENT='production'
 
+ENVIRONMENT = 'production'
+
 if ENVIRONMENT == 'development':
-    DEBUG= True
+    DEBUG = True
 else:
-    DEBUG=False
+    DEBUG = False
 
 POSTGRES_LOCALLY= True
 if ENVIRONMENT== 'production' or POSTGRES_LOCALLY== True:
