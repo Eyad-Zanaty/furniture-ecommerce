@@ -56,7 +56,7 @@ def payment_callback(request):
     
     data = request.data if request.method == 'POST' else request.GET
     
-    merchant_order_id= data.get('merchant_order_id')
+    merchant_order_id = request.data.get("obj", {}).get("merchant_order_id")
     order_id = merchant_order_id.split("-")[0]
     order_id = int(order_id) 
     
