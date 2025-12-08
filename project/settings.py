@@ -37,7 +37,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     '127.0.0.1:8000',
     'localhost:8000',
-    'furniture-ecommerce-production.up.railway.app'
+    'https://furniture-ecommerce-production.up.railway.app/'
     ]
 
 
