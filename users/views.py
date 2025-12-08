@@ -42,7 +42,7 @@ def signup_view(request):
         User.objects.create_user(email=email, password=password1, first_name=first_name, last_name=last_name,
                                  company_name=company_name, phone_number=phone_number, address=address)
         messages.success(request, 'Signup successful. Please log in.')
-        return render(request, 'users/login_page.html')
+        return redirect('users:login')
     
     return render(request, 'users/signup_page.html')
 
@@ -63,7 +63,7 @@ def reset_password(request):
             user.set_password(new_password)
             user.save()
             messages.success(request, 'Password reset successful')
-            return render(request, 'users/login_page.html')
+            return redirect('users:login')
         else:
             error= 'Invalid email or password'
             return render(request, 'users/reset_password_page.html', {"error": error})
