@@ -30,7 +30,7 @@ def create_payment(request):
     auth_token = paymob.Paymob.get_auth_token()
     order_response = paymob.Paymob.create_order(auth_token, total_price_cents, merchant_order_id=order_instance.id)  # amount in cents
     print("ORDER RESPONSE: ", order_response)
-    paymob_order_id = order_response["id"]
+    paymob_order_id = order_response["order"]
     
     payment_token = paymob.Paymob.get_payment_token(auth_token, paymob_order_id, total_price_cents, merchant_order_id=order_instance.id, user=request.user)
 
