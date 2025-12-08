@@ -189,8 +189,14 @@ ENVIRONMENT = 'production'
 
 if ENVIRONMENT == 'development':
     DEBUG = True
+    ALLOWED_HOSTS=[
+    'furniture-ecommerce-production.up.railway.app',
+    ]
 else:
     DEBUG = False
+    ALLOWED_HOSTS=[
+    'furniture-ecommerce-production.up.railway.app',
+    ]
 
 POSTGRES_LOCALLY= True
 if ENVIRONMENT== 'production' or POSTGRES_LOCALLY== True:
