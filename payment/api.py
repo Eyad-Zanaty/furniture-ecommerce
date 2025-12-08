@@ -57,9 +57,11 @@ def payment_callback(request):
     data = request.data if request.method == 'POST' else request.GET
     
     merchant_order_id= data.get('merchant_order_id')
+    order_id = merchant_order_id.split("-")[0]
+    order_id = int(order_id) 
     
     try:
-        get_order = order.objects.get(id=merchant_order_id)
+        get_order = order.objects.get(id=order_id)
         user = get_order.order_checkout
     except order.DoesNotExist:
         return Response({"detail": "Order not found"}, status=404)
