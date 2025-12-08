@@ -34,7 +34,7 @@ SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
 # DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG= config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS=['*','furniture-ecommerce-production.up.railway.app']
+ALLOWED_HOSTS=['*','furniture-ecommerce-production.up.railway.app','<prod DNS, host, and/or IP>']
 
 CSRF_TRUSTED_ORIGINS=[
     'https://furniture-ecommerce-production.up.railway.app',
