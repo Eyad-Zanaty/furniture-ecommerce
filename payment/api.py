@@ -56,7 +56,7 @@ def payment_callback(request):
     
     data = request.data if request.method == 'POST' else request.GET
     
-    merchant_order_id = request.data.get("obj", {}).get("merchant_order_id")
+    merchant_order_id= data.get('merchant_order_id')
     order_id = merchant_order_id.split("-")[0]
     order_id = int(order_id) 
     
@@ -72,7 +72,7 @@ def payment_callback(request):
         print("Payment successful")
         get_order.order_status = "success"
         
-        message= f"""Hello {request.user.first_name},
+        message= f"""Hello {get_order.order_checkout.first_name},
 
 Thank you for your purchase!
 
@@ -90,7 +90,7 @@ Thank you for choosing us!
             "Furniture Payment",
             message,
             settings.EMAIL_HOST_USER,
-            [request.user.email],
+            [get_order.order_checkout.email],
             fail_silently=False,
         )
         get_order.save()
@@ -99,7 +99,7 @@ Thank you for choosing us!
     else:
         print("Payment failed")
         get_order.order_status = "failed"
-        message= f"""Hello { request.user.first_name },
+        message= f"""Hello { get_order.order_checkout.first_name },
 
 Unfortunately, we were unable to process your payment for the following order:
 
@@ -113,7 +113,7 @@ If you need help, we’re always here for you.
             "Furniture Payment",
             message,
             settings.EMAIL_HOST_USER,
-            [request.user.email],
+            [get_order.order_checkout.email],
             fail_silently=False,
         )
         get_order.save()
