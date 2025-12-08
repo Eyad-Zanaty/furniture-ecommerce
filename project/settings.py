@@ -41,6 +41,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         'furniture-ecommerce-production.up.railway.app',
+        '*'
     ]
 
 CSRF_TRUSTED_ORIGINS=[
