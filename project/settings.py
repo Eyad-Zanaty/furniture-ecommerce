@@ -46,6 +46,13 @@ else:
 
 CSRF_TRUSTED_ORIGINS=[
     'https://furniture-ecommerce-production.up.railway.app/',
+    'https://furniture-ecommerce-production.up.railway.app/admin/',
+    'https://furniture-ecommerce-production.up.railway.app/shop/',
+    'https://furniture-ecommerce-production.up.railway.app/shop/<int:pk>/',
+    'https://furniture-ecommerce-production.up.railway.app/checkout/paymob/create/',
+    'https://furniture-ecommerce-production.up.railway.app/accounts/login/',
+    'https://furniture-ecommerce-production.up.railway.app/accounts/reset-password/',
+    'https://furniture-ecommerce-production.up.railway.app/accounts/signup/',
     'https://furniture-ecommerce-production.up.railway.app/checkout/paymob/webhook/',
     'http://127.0.0.1:8000',
     'http://localhost:8000',
