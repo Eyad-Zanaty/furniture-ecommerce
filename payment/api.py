@@ -1,3 +1,4 @@
+import time
 from rest_framework.decorators import api_view
 from products.models import Cart
 from .models import order
@@ -31,7 +32,7 @@ def create_payment(request):
     order_response = paymob.Paymob.create_order(
         auth_token,
         total_price_cents,
-        merchant_order_id=order_instance.id
+        merchant_order_id=f"{request.user.id}-{int(time.time())}"
     )  # amount in cents
     print("ORDER RESPONSE: ", order_response)
     paymob_order_id = order_response["id"]
@@ -40,7 +41,8 @@ def create_payment(request):
         auth_token,
         paymob_order_id,
         total_price_cents,
-        merchant_order_id=order_instance.id
+        merchant_order_id=order_instance.id,
+        user=request.user
     )
 
     payment_url = f"{settings.PAYMOB_IFRAME_BASE_URL}?payment_token={payment_token}"

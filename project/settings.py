@@ -37,7 +37,7 @@ DEBUG= config('DEBUG', default=False, cast=bool)
 # ALLOWED_HOSTS=['*','furniture-ecommerce-production.up.railway.app','<prod DNS, host, and/or IP>']
 
 if DEBUG:
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['*',]
 else:
     ALLOWED_HOSTS = [
         'furniture-ecommerce-production.up.railway.app',
