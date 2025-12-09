@@ -38,6 +38,7 @@ class checkout(models.Model):
     
 class order(models.Model):
     order_checkout = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    paymob_order_id= models.CharField(max_length=50, null=True, blank=True)
     order_total_price = models.DecimalField(max_digits=10, decimal_places=2)
     order_status = models.CharField(max_length=50, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)

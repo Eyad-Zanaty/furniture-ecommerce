@@ -32,16 +32,18 @@ def create_payment(request):
     order_response = paymob.Paymob.create_order(
         auth_token,
         total_price_cents,
-        merchant_order_id=f"{request.user.id}-{int(time.time())}"
+        merchant_order_id=f"{order_instance.id}-{int(time.time())}"
     )  # amount in cents
+    
     print("ORDER RESPONSE: ", order_response)
     paymob_order_id = order_response["id"]
+    order_instance.paymob_order_id = paymob_order_id
+    order_instance.save()
 
     payment_token = paymob.Paymob.get_payment_token(
         auth_token,
         paymob_order_id,
         total_price_cents,
-        merchant_order_id=order_instance.id,
         user=request.user
     )
 
@@ -53,16 +55,24 @@ def create_payment(request):
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def payment_callback(request):
+    print("Callback hit!")
+    print("Request method:", request.method)
+    print("GET data:", request.GET)
+    print("POST data:", request.data)
     
     data = request.data if request.method == 'POST' else request.GET
     
-    order_id = data.get("order")
-    
+    merchant_order_id = data.get("merchant_order_id")
+    print("merchant_order_id:", merchant_order_id)
+
+
     try:
+        order_id_part = merchant_order_id.split("-")[0]
+        order_id = int(order_id_part)
+        print("order id:", order_id)
         get_order = order.objects.get(id=order_id)
-        user = get_order.order_checkout
-    except order.DoesNotExist:
-        return Response({"detail": "Order not found"}, status=404)
+    except Exception:
+        return Response({"detail": "Invalid merchant_order_id"}, status=400)
     
 
     success = str(data.get('success')).lower()
