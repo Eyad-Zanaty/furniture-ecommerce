@@ -64,13 +64,15 @@
                             <div class="cart-title">
                                 <h2>Checkout</h2>
                             </div>
-                            {% if messages %}
-    <div class="alert-messages mb-3">
-        {% for msg in messages %}
-            <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
-        {% endfor %}
-    </div>
-{% endif %}
+                            {% if user_order.order_status == "success" %}
+                                <div class="alert-messages mb-3">
+                                        <div class="alert alert-Payment successful!">Payment successful!</div>
+                                </div>
+                            {% elif %}
+                                <div class="alert-messages mb-3">
+                                        <div class="alert alert-Payment failed!">Payment failed!</div>
+                                </div>
+                            {% endif %}
                             <form action="#" method="post">
                                 {% csrf_token %}
                                 <div class="row">
