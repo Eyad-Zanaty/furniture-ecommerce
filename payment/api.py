@@ -60,7 +60,8 @@ def payment_callback(request):
     print("GET data:", request.GET)
     print("POST data:", request.data)
     
-    data = request.data if request.method == 'POST' else request.GET
+    data = request.data.copy()  # DRF request.data
+    data.update(request.GET)    # إضافة query params
     
     merchant_order_id = data.get("merchant_order_id")
     print("merchant_order_id:", merchant_order_id)
