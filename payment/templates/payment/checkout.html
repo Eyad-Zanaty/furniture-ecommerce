@@ -64,14 +64,16 @@
                             <div class="cart-title">
                                 <h2>Checkout</h2>
                             </div>
+                            {% if user_order %}
                             {% if user_order.order_status == "success" %}
                                 <div class="alert-messages mb-3">
-                                        <div class="alert alert-Payment successful!">Payment successful!</div>
+                                        <div class="alert alert-success">Payment successful!</div>
                                 </div>
                             {% else %}
                                 <div class="alert-messages mb-3">
-                                        <div class="alert alert-Payment failed!">Payment failed!</div>
+                                        <div class="alert alert-danger">Payment failed!</div>
                                 </div>
+                            {% endif %}
                             {% endif %}
                             <form action="#" method="post">
                                 {% csrf_token %}
