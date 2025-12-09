@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from products.models import Cart, Subscribtions
+from products.models import Cart
+from .models import order
 from .forms import CheckoutForm
 from users.models import CustomUser as User
 from django.views.decorators.csrf import csrf_exempt
@@ -13,6 +14,8 @@ from django.conf import settings
 @csrf_exempt
 def checkout_view(request):
     cart_items = Cart.objects.filter(cart_user=request.user)
+    last_login = request.user.last_login
+    user_order= order.objects.filter(order_checkout=request.user, created_at__gte=last_login)
 
     # Calculate subtotal and total price
     sub_price = 0
@@ -45,29 +48,32 @@ def checkout_view(request):
         return redirect('users:login')
     
     
-    if request.method == 'POST' and 'email_subscription' in request.POST:
-        email= request.POST.get('email_subscription')
-        Subscribtions.objects.create(
-            subscribtion_user= request.user,
-            subscribtions_email= email,
-        )
+    # Isn't allowed on Railway
+    
+#     if request.method == 'POST' and 'email_subscription' in request.POST:
+#         email= request.POST.get('email_subscription')
+#         Subscribtions.objects.create(
+#             subscribtion_user= request.user,
+#             subscribtions_email= email,
+#         )
         
-        message=f"""Hi {request.user.first_name},
+#         message=f"""Hi {request.user.first_name},
 
-Subscription confirmed — welcome to the community!
-        """
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [request.user.email],
-            fail_silently=False,
-        )
+# Subscription confirmed — welcome to the community!
+#         """
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [request.user.email],
+#             fail_silently=False,
+#         )
     
     context={
         'sub_price': sub_price,
         'total_price': total_price,
         'cart_items': cart_items,
         'form': CheckoutForm,
+        'user_order': user_order,
     }
     return render(request, 'payment/checkout.html', context)

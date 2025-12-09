@@ -24,24 +24,27 @@ def home(request):
         logout(request)
         return redirect('users:login')
     
-    if request.method == 'POST' and 'email_subscription' in request.POST:
-        email= request.POST.get('email_subscription')
-        Subscribtions.objects.create(
-            subscribtion_user= request.user,
-            subscribtions_email= email,
-        )
+    
+    # Isn't allowed on Railway
+    
+#     if request.method == 'POST' and 'email_subscription' in request.POST:
+#         email= request.POST.get('email_subscription')
+#         Subscribtions.objects.create(
+#             subscribtion_user= request.user,
+#             subscribtions_email= email,
+#         )
         
-        message=f"""Hi {request.user.first_name},
+#         message=f"""Hi {request.user.first_name},
 
-Subscription confirmed — welcome to the community!
-        """
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [request.user.email],
-            fail_silently=False,
-        )
+# Subscription confirmed — welcome to the community!
+#         """
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [request.user.email],
+#             fail_silently=False,
+#         )
     
     context={
         'chairs': least_price('Chairs'),
@@ -85,24 +88,26 @@ def shop(request):
         logout(request)
         return redirect('users:login')
     
-    if request.method == 'POST' and 'email_subscription' in request.POST:
-        email= request.POST.get('email_subscription')
-        Subscribtions.objects.create(
-            subscribtion_user= request.user,
-            subscribtions_email= email,
-        )
+    # Isn't allowed on Railway
+    
+#     if request.method == 'POST' and 'email_subscription' in request.POST:
+#         email= request.POST.get('email_subscription')
+#         Subscribtions.objects.create(
+#             subscribtion_user= request.user,
+#             subscribtions_email= email,
+#         )
         
-        message=f"""Hi {request.user.first_name},
+#         message=f"""Hi {request.user.first_name},
 
-Subscription confirmed — welcome to the community!
-        """
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [request.user.email],
-            fail_silently=False,
-        )
+# Subscription confirmed — welcome to the community!
+#         """
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [request.user.email],
+#             fail_silently=False,
+#         )
     
     # Apply filters
     myfilter= ProductFilter(request.GET, queryset=products)
@@ -162,24 +167,26 @@ def product_details(request, pk):
         return redirect('users:login')
     
     
-    if request.method == 'POST' and 'email_subscription' in request.POST:
-        email= request.POST.get('email_subscription')
-        Subscribtions.objects.create(
-            subscribtion_user= request.user,
-            subscribtions_email= email,
-        )
+    # Isn't allowed on Railway
+    
+#     if request.method == 'POST' and 'email_subscription' in request.POST:
+#         email= request.POST.get('email_subscription')
+#         Subscribtions.objects.create(
+#             subscribtion_user= request.user,
+#             subscribtions_email= email,
+#         )
         
-        message=f"""Hi {request.user.first_name},
+#         message=f"""Hi {request.user.first_name},
 
-Subscription confirmed — welcome to the community!
-        """
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [request.user.email],
-            fail_silently=False,
-        )
+# Subscription confirmed — welcome to the community!
+#         """
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [request.user.email],
+#             fail_silently=False,
+#         )
     
     
     context={
@@ -216,24 +223,26 @@ def cart(request):
         return redirect('users:login')
     
     
-    if request.method == 'POST' and 'email_subscription' in request.POST:
-        email= request.POST.get('email_subscription')
-        Subscribtions.objects.create(
-            subscribtion_user= request.user,
-            subscribtions_email= email,
-        )
+    # Isn't allowed on Railway
+    
+#     if request.method == 'POST' and 'email_subscription' in request.POST:
+#         email= request.POST.get('email_subscription')
+#         Subscribtions.objects.create(
+#             subscribtion_user= request.user,
+#             subscribtions_email= email,
+#         )
         
-        message=f"""Hi {request.user.first_name},
+#         message=f"""Hi {request.user.first_name},
 
-Subscription confirmed — welcome to the community!
-        """
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [request.user.email],
-            fail_silently=False,
-        )
+# Subscription confirmed — welcome to the community!
+#         """
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [request.user.email],
+#             fail_silently=False,
+#         )
     
     context={
         'cart_items': cart_items,

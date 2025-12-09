@@ -72,51 +72,53 @@ def payment_callback(request):
         print("Payment successful")
         get_order.order_status = "success"
         
-        message= f"""Hello {get_order.order_checkout.first_name},
+        # Isn't allowed on Railway
+        
+#         message= f"""Hello {get_order.order_checkout.first_name},
 
-Thank you for your purchase!
+# Thank you for your purchase!
 
-We’re happy to inform you that your payment with {int(data.get('amount_cents'))/100}EGP has been successfully processed.
+# We’re happy to inform you that your payment with {int(data.get('amount_cents'))/100}EGP has been successfully processed.
 
-Your order is now being prepared. You will receive another email once it is shipped/ready.
+# Your order is now being prepared. You will receive another email once it is shipped/ready.
 
-If you have any questions, feel free to contact us.
+# If you have any questions, feel free to contact us.
 
-Thank you for choosing us!
-"""
+# Thank you for choosing us!
+# """
         
         
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [get_order.order_checkout.email],
-            fail_silently=False,
-        )
-        get_order.save()
-        return redirect('products:home')
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [get_order.order_checkout.email],
+#             fail_silently=False,
+#         )
+#         get_order.save()
+#         return redirect('products:home')
     
     else:
         print("Payment failed")
         get_order.order_status = "failed"
-        message= f"""Hello { get_order.order_checkout.first_name },
+#         message= f"""Hello { get_order.order_checkout.first_name },
 
-Unfortunately, we were unable to process your payment for the following order:
+# Unfortunately, we were unable to process your payment for the following order:
 
-Please try again using a different payment method or contact your bank to resolve the issue.
+# Please try again using a different payment method or contact your bank to resolve the issue.
 
-You can retry payment anytime from your account orders page.
+# You can retry payment anytime from your account orders page.
 
-If you need help, we’re always here for you.
-"""
-        send_mail(
-            "Furniture Payment",
-            message,
-            settings.EMAIL_HOST_USER,
-            [get_order.order_checkout.email],
-            fail_silently=False,
-        )
-        get_order.save()
-        return redirect('products:home')
+# If you need help, we’re always here for you.
+# """
+#         send_mail(
+#             "Furniture Payment",
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             [get_order.order_checkout.email],
+#             fail_silently=False,
+#         )
+#         get_order.save()
+#         return redirect('products:home')
     
     return Response({"status": "success"})
