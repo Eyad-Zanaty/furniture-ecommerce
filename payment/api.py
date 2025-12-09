@@ -96,7 +96,7 @@ def payment_callback(request):
 #             fail_silently=False,
 #         )
 #         get_order.save()
-#         return redirect('products:home')
+        return redirect('products:home')
     
     else:
         print("Payment failed")
@@ -119,6 +119,6 @@ def payment_callback(request):
 #             fail_silently=False,
 #         )
 #         get_order.save()
-#         return redirect('products:home')
+        return redirect('products:home')
     
     return Response({"status": "success"})
