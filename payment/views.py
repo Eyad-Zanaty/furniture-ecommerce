@@ -15,7 +15,10 @@ from django.conf import settings
 def checkout_view(request):
     cart_items = Cart.objects.filter(cart_user=request.user)
     last_login = request.user.last_login
-    user_order= order.objects.filter(order_checkout=request.user, created_at__gte=last_login)
+    user_order = order.objects.filter(
+        order_checkout=request.user,
+        created_at__gte=request.user.last_login
+    ).order_by('-created_at').first()
 
     # Calculate subtotal and total price
     sub_price = 0
