@@ -110,7 +110,7 @@ def payment_callback(request):
 #         )
 #         get_order.save()
 
-        return redirect('products:home')
+        return redirect('payment:checkout')
     
     else:
         print("Payment failed")
@@ -135,5 +135,5 @@ def payment_callback(request):
 #         )
 
         
-        return redirect('products:home')
+        return redirect('payment:checkout')
 
