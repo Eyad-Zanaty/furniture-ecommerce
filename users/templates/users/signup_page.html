@@ -134,10 +134,12 @@
             </div>
         </div>
         {% if error %}
-        <div class="alert alert-danger">
-            {{ error }}
-        </div>
-    {% endif %}
+            <div class="alert-messages mb-3">
+              <div class="alert alert-danger">
+                  {{ error }}
+              </div>
+            </div>
+        {% endif %}
         <button class="btn">Sign Up</button>
     </form>
     <p class="text-center"><a href="{% url 'users:login' %}" class="link">Back to Login</a></p>

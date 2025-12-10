@@ -82,6 +82,9 @@ def payment_callback(request):
         get_order.order_status = "success"
         get_order.save()
         
+        user_id= get_order.order_checkout.id
+        user_cart_clear= Cart.objects.filter(cart_user_id= user_id).delete()
+        
         # Isn't allowed on Railway
         
 #         message= f"""Hello {get_order.order_checkout.first_name},
