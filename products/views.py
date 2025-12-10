@@ -11,7 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 # Create your views here.
-
+@csrf_exempt
 @login_required
 def home(request):
     cart_items= Cart.objects.filter(cart_user= request.user)
@@ -55,6 +55,7 @@ def home(request):
     return render(request, 'products/home.html', context)
 
 @login_required
+@csrf_exempt
 @cache_page(60 * 15, key_prefix='shop_page') 
 def shop(request):
     # Queryset of products

@@ -80,6 +80,7 @@ def payment_callback(request):
     if success == 'true':
         print("Payment successful")
         get_order.order_status = "success"
+        get_order.save()
         
         # Isn't allowed on Railway
         
@@ -105,11 +106,13 @@ def payment_callback(request):
 #             fail_silently=False,
 #         )
 #         get_order.save()
+
         return redirect('products:home')
     
     else:
         print("Payment failed")
         get_order.order_status = "failed"
+        get_order.save()
 #         message= f"""Hello { get_order.order_checkout.first_name },
 
 # Unfortunately, we were unable to process your payment for the following order:
@@ -127,7 +130,7 @@ def payment_callback(request):
 #             [get_order.order_checkout.email],
 #             fail_silently=False,
 #         )
-#         get_order.save()
+
+        
         return redirect('products:home')
-    
-    return Response({"status": "success"})
+
