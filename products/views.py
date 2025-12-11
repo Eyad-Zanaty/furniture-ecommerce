@@ -224,21 +224,22 @@ def cart(request):
         sub_prices+= item.cart_sub_price
         total_prices+= item.cart_total_price
     
-    item_id = request.POST.get("item_id")
+    if request.method == "POST" and "item_id" in request.POST:
+        item_id = request.POST.get("item_id")
 
-    if item_id:
-            item = Cart.objects.filter(id=item_id, cart_user=request.user).first()
+        if item_id:
+                item = Cart.objects.filter(id=item_id, cart_user=request.user).first()
 
-            if item:
-                quantity = int(request.POST.get("cart_quantity", 1))
+                if item:
+                    quantity = int(request.POST.get("cart_quantity", 1))
 
-                if quantity < 1:
-                    quantity = 1
+                    if quantity < 1:
+                        quantity = 1
 
-                item.cart_quantity = quantity
-                item.cart_sub_price = item.cart_product.product_price * quantity
-                item.cart_total_price = item.cart_sub_price + item.cart_delivery_fees
-                item.save()
+                    item.cart_quantity = quantity
+                    item.cart_sub_price = item.cart_product.product_price * quantity
+                    item.cart_total_price = item.cart_sub_price + item.cart_delivery_fees
+                    item.save()
         
     
     if request.method == 'POST' and 'logout' in request.POST:
