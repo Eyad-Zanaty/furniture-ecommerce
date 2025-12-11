@@ -14,42 +14,53 @@ from django.contrib.auth.decorators import login_required
 @api_view(['POST'])
 def create_payment(request):
     cart_items = Cart.objects.filter(cart_user=request.user)
-
-    # Calculate total price
-    total_price = 0
-    for item in cart_items:
-        total_price += item.cart_total_price
+    
+    if cart_items.count() > 0:
+        # Calculate total price
+        total_price = 0
+        for item in cart_items:
+            total_price += item.cart_total_price
+            
+        total_price_cents = int(total_price * 100)
         
-    total_price_cents = int(total_price * 100)
+        order_instance = order.objects.create(
+            order_checkout=request.user,
+            order_total_price=total_price,
+        )
+
+        # Paymob integration
+        auth_token = paymob.Paymob.get_auth_token()
+        order_response = paymob.Paymob.create_order(
+            auth_token,
+            total_price_cents,
+            merchant_order_id=f"{order_instance.id}-{int(time.time())}"
+        )  # amount in cents
+        
+        print("ORDER RESPONSE: ", order_response)
+        paymob_order_id = order_response["id"]
+        order_instance.paymob_order_id = paymob_order_id
+        order_instance.save()
+
+        payment_token = paymob.Paymob.get_payment_token(
+            auth_token,
+            paymob_order_id,
+            total_price_cents,
+            user=request.user
+        )
+
+        payment_url = f"{settings.PAYMOB_IFRAME_BASE_URL}?payment_token={payment_token}"
+
+        return redirect(payment_url)
     
-    order_instance = order.objects.create(
-        order_checkout=request.user,
-        order_total_price=total_price,
-    )
-
-    # Paymob integration
-    auth_token = paymob.Paymob.get_auth_token()
-    order_response = paymob.Paymob.create_order(
-        auth_token,
-        total_price_cents,
-        merchant_order_id=f"{order_instance.id}-{int(time.time())}"
-    )  # amount in cents
-    
-    print("ORDER RESPONSE: ", order_response)
-    paymob_order_id = order_response["id"]
-    order_instance.paymob_order_id = paymob_order_id
-    order_instance.save()
-
-    payment_token = paymob.Paymob.get_payment_token(
-        auth_token,
-        paymob_order_id,
-        total_price_cents,
-        user=request.user
-    )
-
-    payment_url = f"{settings.PAYMOB_IFRAME_BASE_URL}?payment_token={payment_token}"
-
-    return redirect(payment_url)
+    else:
+        
+        order_instance = order.objects.create(
+            order_checkout=request.user,
+            order_total_price=total_price,
+            order_status= "failed"
+        )
+        
+        return redirect('products:home')
 
 
 @csrf_exempt
