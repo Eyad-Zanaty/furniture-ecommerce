@@ -220,10 +220,9 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
-                                    <form method="get" action="{% url 'products:cart' %}">
-                                    <input type="hidden" name="add_to_cart" value="{{ product.id }}">
-
-                                    <button type="submit" class="cart-btn" data-toggle="tooltip" data-placement="left" title="add_to_cart" name="add_to_cart"
+                                    <form method="post" action="{% url 'products:cart' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="cart-btn" data-toggle="tooltip" data-placement="left" title="add_to_cart_btn" name="add_to_cart_btn" value="{{ product.id }}"
                                             style="background:none; border:none; cursor:pointer;">
                                         <img src="{% static 'img/core-img/cart.png' %}" alt="">
                                     </button>

@@ -72,19 +72,32 @@ def shop(request):
         elif per_page == 'popular':
             products= products.order_by('-product_price')
             
-    if 'add_to_cart' in request.GET:
-        product_id = request.GET.get('add_to_cart')
+    if 'add_to_cart_btn' in request.POST:
+        product_id = request.POST.get('add_to_cart_btn')
         product = Product.objects.get(id=product_id)
         cart_item, created = Cart.objects.get_or_create(
+            cart_item, created = Cart.objects.get_or_create(
             cart_user=request.user,
             cart_product=product,
-            cart_quantity=1,
-            cart_sub_price= product.product_price * 1,
-            cart_delivery_fees= 50,
-            cart_total_price= (product.product_price * 1) + 50,
+            defaults={
+                "cart_quantity": 1,
+                "cart_sub_price": product.product_price,
+                "cart_delivery_fees": 50,
+                "cart_total_price": product.product_price + 50,
+            },
+            )
         )
         cart_item.save()
         
+        if not created:
+                cart_item.cart_quantity += 1
+                cart_item.cart_sub_price = product.product_price * cart_item.cart_quantity
+                cart_item.cart_total_price = cart_item.cart_sub_price + cart_item.cart_delivery_fees
+                cart_item.save()
+
+        cart_item.save()
+        
+    
     if request.method == 'POST' and 'logout' in request.POST:
         logout(request)
         return redirect('users:login')
@@ -197,6 +210,7 @@ def product_details(request, pk):
     }
     return render(request, 'products/product-details.html', context)
 
+
 @login_required
 @csrf_exempt
 def cart(request):
@@ -210,13 +224,21 @@ def cart(request):
         sub_prices+= item.cart_sub_price
         total_prices+= item.cart_total_price
     
-    if request.method == 'POST':
-        item= Cart.objects.get(id=request.POST.get("item_id"))
-        quantity = int(request.POST.get('cart_quantity', 1))
-        item.cart_quantity = quantity
-        item.cart_sub_price = item.cart_product.product_price * quantity
-        item.cart_total_price = item.cart_sub_price + item.cart_delivery_fees
-        item.save()
+    item_id = request.POST.get("item_id")
+
+    if item_id:
+            item = Cart.objects.filter(id=item_id, cart_user=request.user).first()
+
+            if item:
+                quantity = int(request.POST.get("cart_quantity", 1))
+
+                if quantity < 1:
+                    quantity = 1
+
+                item.cart_quantity = quantity
+                item.cart_sub_price = item.cart_product.product_price * quantity
+                item.cart_total_price = item.cart_sub_price + item.cart_delivery_fees
+                item.save()
         
     
     if request.method == 'POST' and 'logout' in request.POST:
