@@ -223,7 +223,7 @@
                                     <form method="get" action="{% url 'products:cart' %}">
                                     <input type="hidden" name="add_to_cart" value="{{ product.id }}">
 
-                                    <button type="submit" class="cart-btn" data-toggle="tooltip" data-placement="left" title="add_to_cart"
+                                    <button type="submit" class="cart-btn" data-toggle="tooltip" data-placement="left" title="add_to_cart" name="add_to_cart"
                                             style="background:none; border:none; cursor:pointer;">
                                         <img src="{% static 'img/core-img/cart.png' %}" alt="">
                                     </button>
