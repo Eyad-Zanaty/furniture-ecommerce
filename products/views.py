@@ -224,11 +224,12 @@ def cart(request):
         sub_prices+= item.cart_sub_price
         total_prices+= item.cart_total_price
     
-    if request.method == "POST" and "item_id" in request.POST:
+    if request.method == "POST":
+        
         item_id = request.POST.get("item_id")
 
         if item_id:
-                item = Cart.objects.filter(id=item_id, cart_user=request.user).first()
+                item = Cart.objects.get(id=item_id, cart_user=request.user)
 
                 if item:
                     quantity = int(request.POST.get("cart_quantity", 1))
