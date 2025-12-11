@@ -56,7 +56,7 @@ def create_payment(request):
         
         order_instance = order.objects.create(
             order_checkout=request.user,
-            order_total_price=total_price,
+            order_total_price=0,
             order_status= "failed"
         )
         

@@ -76,16 +76,14 @@ def shop(request):
         product_id = request.POST.get('add_to_cart_btn')
         product = Product.objects.get(id=product_id)
         cart_item, created = Cart.objects.get_or_create(
-            cart_item, created = Cart.objects.get_or_create(
-            cart_user=request.user,
-            cart_product=product,
-            defaults={
-                "cart_quantity": 1,
-                "cart_sub_price": product.product_price,
-                "cart_delivery_fees": 50,
-                "cart_total_price": product.product_price + 50,
-            },
-            )
+        cart_user=request.user,
+        cart_product=product,
+        defaults={
+            "cart_quantity": 1,
+            "cart_sub_price": product.product_price,
+            "cart_delivery_fees": 50,
+            "cart_total_price": product.product_price + 50,
+        },
         )
         cart_item.save()
         
@@ -95,7 +93,7 @@ def shop(request):
                 cart_item.cart_total_price = cart_item.cart_sub_price + cart_item.cart_delivery_fees
                 cart_item.save()
 
-        cart_item.save()
+                return redirect('products:cart')
         
     
     if request.method == 'POST' and 'logout' in request.POST:

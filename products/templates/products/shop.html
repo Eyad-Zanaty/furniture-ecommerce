@@ -220,7 +220,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
-                                    <form method="post" action="{% url 'products:cart' %}">
+                                    <form method="post" action="{% url 'products:shop' %}">
                                     {% csrf_token %}
                                     <button type="submit" class="cart-btn" data-toggle="tooltip" data-placement="left" title="add_to_cart_btn" name="add_to_cart_btn" value="{{ product.id }}"
                                             style="background:none; border:none; cursor:pointer;">
