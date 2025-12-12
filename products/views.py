@@ -59,7 +59,7 @@ def home(request):
 @cache_page(60 * 15, key_prefix='shop_page') 
 def shop(request):
     # Queryset of products
-    products= Product.objects.filter()
+    products= Product.objects.filter(product_instock=True)
     
     cart_items= Cart.objects.filter(cart_user= request.user)
     
